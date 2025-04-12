@@ -11,7 +11,8 @@ import { IoShieldCheckmarkSharp } from "react-icons/io5";
 import { IoMdCheckmarkCircle } from "react-icons/io";
 import { useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
-
+import Footer from "../component/footer";
+import { Link } from "react-router-dom";
 const Landingpage = () => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -59,7 +60,9 @@ const Landingpage = () => {
             <ul className="flex space-x-6 text-lg font-medium text-[#2C2C2C]">
               <li className="cursor-pointer hover:text-blue-700">About</li>
               <li className="cursor-pointer hover:text-blue-700">Contact</li>
-              <li className="cursor-pointer hover:text-blue-700">Login</li>
+              <Link to="login">
+                <li className="cursor-pointer hover:text-blue-700">Login</li>
+              </Link>
               <li className="cursor-pointer hover:text-blue-700">Signup</li>
             </ul>
           </nav>
@@ -94,12 +97,15 @@ const Landingpage = () => {
             >
               Contact
             </li>
-            <li
-              className="cursor-pointer hover:text-blue-700"
-              onClick={() => setIsOpen(false)}
-            >
-              Login
-            </li>
+            <Link to="login">
+           
+              <li
+                className="cursor-pointer hover:text-blue-700"
+                onClick={() => setIsOpen(false)}
+              >
+                Login
+              </li>
+            </Link>
             <li
               className="cursor-pointer hover:text-blue-700"
               onClick={() => setIsOpen(false)}
@@ -203,6 +209,7 @@ const Landingpage = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };
