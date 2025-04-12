@@ -11,7 +11,7 @@ import { IoShieldCheckmarkSharp } from "react-icons/io5";
 import { IoMdCheckmarkCircle } from "react-icons/io";
 import { useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
-import Footer from "../component/footer";
+import Footer from "../component/Footer";
 import { Link } from "react-router-dom";
 const Landingpage = () => {
   const [isOpen, setIsOpen] = useState(false);
