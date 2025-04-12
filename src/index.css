@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply bg-[#f5f5f5];
+  @apply p-4;
+  @apply justify-center;
+  @apply items-center;
+ 
+}
+
+
