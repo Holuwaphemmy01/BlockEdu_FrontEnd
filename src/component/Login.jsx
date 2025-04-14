@@ -42,30 +42,38 @@ export const Login = () => {
     />
   </div>
 </div>
-<div className="flex justify-between mt-5"> 
-<div className="flex space-x-5 ">
-    <h1 className="w-6 h-6 bg-gray-300"></h1>
-    <h1>Rememeber me</h1>
+<div className="flex sm:flex-row justify-between items-center mt-5 gap-2 sm:gap-4 text-xs sm:text-sm">
+  <div className="flex items-center gap-2 whitespace-nowrap">
+    <input
+      type="checkbox"
+      id="remember"
+      className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+    />
+    <label htmlFor="remind" className="text-gray-700">
+      Remind me
+    </label>
+  </div>
+
+  <div className="text-[#1E88E5] font-semibold cursor-pointer whitespace-nowrap">
+    Forgot Password?
+  </div>
 </div>
-<div className="text-[#1E88E5] font-extrabold">Forget Password?</div>
-</div>
+
 <div className="flex justify-center mt-6">
   <button
     type="submit"
-    className="bg-[#1E88E5] rounded-xl text-white w-[255px] h-[70px] flex justify-center items-center text-xl font-semibold hover:bg-blue-700 transition duration-300"
+    className="bg-[#1E88E5] rounded-xl text-white w-[255px] h-[60px] flex justify-center items-center text-base sm:text-xl font-semibold hover:bg-blue-700 transition duration-300"
   >
     Log In
   </button>
 </div>
-<h1 className="border bg-slate-400 w-full mt-5"></h1>
-<div className="flex justify-center gap-7 mt-5">
-    <h1 className="text-[#2c2c2c]">Don't have an account yet?</h1>
-    <h1 className="text-[#4CAF50] font-extrabold">Sign Up</h1>
+
+<hr className="bg-slate-400 w-full mt-5" />
+
+<div className="flex  sm:flex-row justify-center items-center sm:gap-2 gap-1 mt-5 text-center text-xs sm:text-sm">
+  <h1 className="text-[#2c2c2c]">Don't have an account yet?</h1>
+  <h1 className="text-[#4CAF50] font-bold cursor-pointer">Sign Up</h1>
 </div>
-
-
-
-
     </div>
   );
 };
