@@ -141,14 +141,16 @@ const Landingpage = () => {
 
           <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-6 mt-10 max-w-md mx-auto">
   <Link to="/login">
-    <button className="text-xs md:text-base w-[280px] md:w-[300px] text-white rounded-2xl py-3 font-semibold bg-[#1E88E5] hover:bg-blue-700 hover:text-blue-200 transition duration-300">
+    <button className="text-xs md:text-base w-[280px] md:w-[250px] text-white rounded-2xl py-3 font-semibold bg-[#1E88E5] hover:bg-blue-700 hover:text-blue-200 transition duration-300">
       Get Started
     </button>
   </Link>
 
-  <button className="text-xs md:text-base border border-[#4CAF50] w-[280px] md:w-[300px] text-[#4CAF50] rounded-2xl py-3 font-semibold hover:bg-[#93da95] hover:text-[#4CAF50] transition duration-300">
-    How it works
-  </button>
+  <Link to="/login">
+    <button className="text-xs md:text-base w-[280px] md:w-[250px] text-[#4CAF50] rounded-2xl py-3 font-semibold border  border-[#4CAF50] hover:bg-green-300 hover:text-green-800 transition duration-300">
+      Get Started
+    </button>
+  </Link>
 </div>
 
 
