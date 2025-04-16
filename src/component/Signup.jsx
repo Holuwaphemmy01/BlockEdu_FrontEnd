@@ -72,20 +72,34 @@ const Signup = () => {
 
   const handleSubmit = () => {
     if (validateForm()) {
-      const userData={
-        email:formData.email,
-        name:formData.name
+      const newUser = {
+        email: formData.email,
+        name: formData.name,
+        password: formData.password,
+        type: formData.type,
 
+      };
+  
+      const existingUsers = JSON.parse(localStorage.getItem("registeredUsers")) || [];
+  
+      const userExists = existingUsers.some(user => user.email === newUser.email);
+      if (userExists) {
+        alert("User already registered. Please log in.");
+        navigate("/login");
+        return;
       }
-      localStorage.setItem("userDetails", JSON.stringify(userData));
-      alert("Form submitted successfully");
-      console.log(formData);
+  
+      existingUsers.push(newUser);
+      localStorage.setItem("registeredUsers", JSON.stringify(existingUsers));
+  
+      alert("Registration successful");
       navigate("/dashboard1", { state: formData });
     } else {
       alert("Form submission failed");
     }
   };
-
+  
+  
   const states = [
     "Abia", "Adamawa", "Akwa Ibom", "Anambra", "Bauchi", "Bayelsa", "Benue", "Borno",
     "Cross River", "Delta", "Ebonyi", "Edo", "Ekiti", "Enugu", "Gombe", "Imo", "Jigawa",
@@ -106,7 +120,7 @@ const Signup = () => {
       </h1>
 
       <div className="space-y-6 mt-6">
-        {/* Name */}
+  
         <div className="flex flex-col">
           <label htmlFor="name" className="gap-1 flex mb-1 text-sm font-semibold text-gray-700">
             <MdDriveFileRenameOutline className="mt-1" /> Name
@@ -121,8 +135,6 @@ const Signup = () => {
           />
           {error.name && <p className="text-red-500 text-xs">{error.name}</p>}
         </div>
-
-        {/* Motto */}
         <div className="flex flex-col">
           <label htmlFor="motto" className="text-sm font-semibold text-gray-700">Motto</label>
           <input
@@ -136,7 +148,6 @@ const Signup = () => {
           {error.motto && <p className="text-red-500 text-xs">{error.motto}</p>}
         </div>
 
-        {/* State */}
         <div className="flex flex-col">
           <label htmlFor="state" className="gap-1 flex mb-1 text-sm font-semibold text-gray-700">
             <MdLocationOn className="mt-1" /> State
@@ -154,8 +165,6 @@ const Signup = () => {
           </select>
           {error.state && <p className="text-red-500 text-xs">{error.state}</p>}
         </div>
-
-        {/* City */}
         <div className="flex flex-col">
           <label htmlFor="city" className="text-sm font-semibold text-gray-700">City</label>
           <input
@@ -168,8 +177,6 @@ const Signup = () => {
           />
           {error.city && <p className="text-red-500 text-xs">{error.city}</p>}
         </div>
-
-        {/* Admin */}
         <div className="flex flex-col">
           <label htmlFor="admin" className="text-sm font-semibold text-gray-700">Admin</label>
           <input
@@ -183,7 +190,7 @@ const Signup = () => {
           {error.admin && <p className="text-red-500 text-xs">{error.admin}</p>}
         </div>
 
-        {/* Email */}
+    
         <div className="flex flex-col">
           <label htmlFor="email" className="gap-1 flex mb-1 text-sm font-semibold text-gray-700">
             <MdEmail className="mt-1" /> Official Email
@@ -199,7 +206,7 @@ const Signup = () => {
           {error.email && <p className="text-red-500 text-xs">{error.email}</p>}
         </div>
 
-        {/* Phone */}
+  
         <div className="flex flex-col">
           <label htmlFor="phone" className="gap-1 flex mb-1 text-sm font-semibold text-gray-700">
             <FaPhoneAlt className="mt-1" /> Phone Number
@@ -221,7 +228,7 @@ const Signup = () => {
           {error.phone && <p className="text-red-500 text-xs">{error.phone}</p>}
         </div>
 
-        {/* Type */}
+   
         <div className="flex flex-col">
           <label htmlFor="type" className="gap-1 flex mb-1 text-sm font-semibold text-gray-700">
             <MdLocationOn className="mt-1" /> Type
@@ -240,7 +247,7 @@ const Signup = () => {
           {error.type && <p className="text-red-500 text-xs">{error.type}</p>}
         </div>
 
-        {/* Password */}
+    
         <div className="flex flex-col">
           <label htmlFor="password" className="gap-1 flex mb-1 text-sm font-semibold text-gray-700">
             <FaLock className="mt-1" /> Password
@@ -256,7 +263,7 @@ const Signup = () => {
           {error.password && <p className="text-red-500 text-xs">{error.password}</p>}
         </div>
 
-        {/* Confirm Password */}
+
         <div className="flex flex-col">
           <label htmlFor="confirmPassword" className="gap-1 flex mb-1 text-sm font-semibold text-gray-700">
             <GiConfirmed className="mt-1" /> Confirm Password
@@ -272,7 +279,7 @@ const Signup = () => {
           {error.confirmPassword && <p className="text-red-500 text-xs">{error.confirmPassword}</p>}
         </div>
 
-        {/* Terms */}
+  
         <div className="flex items-center gap-2 text-xs sm:text-sm mt-3">
           <input
             type="checkbox"
@@ -284,7 +291,7 @@ const Signup = () => {
           </label>
         </div>
 
-        {/* Submit */}
+    
         <div className="flex justify-center mt-6">
           <button
             type="submit"
