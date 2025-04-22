@@ -9,5 +9,40 @@ body {
   @apply items-center;
  
 }
+@layer components {
+  .btn-primary {
+    @apply bg-blockedu-primary text-white px-4 py-2 rounded hover:bg-blue-700 transition duration-300;
+  }
+
+  .btn-success {
+    @apply bg-blockedu-success text-white px-4 py-2 rounded hover:bg-green-700 transition duration-300;
+  }
+
+  .text-soft-gray {
+    @apply text-blockedu-softGray;
+  }
+
+  .bg-dark {
+    @apply bg-blockedu-dark text-white;
+  }
+
+  .text-warning {
+    @apply text-blockedu-warning;
+  }
+
+  .bg-neutral {
+    @apply bg-blockedu-neutral text-white;
+  }
+
+  .bg-light {
+    @apply bg-blockedu-light;
+  }
+
+  .card {
+    @apply bg-white rounded-lg shadow-md p-6;
+  }
+}
+
+
 
 

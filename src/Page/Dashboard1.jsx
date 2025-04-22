@@ -8,7 +8,10 @@ const Dashboard1 = () => {
   const [students, setStudents] = useState([]);
   const location = useLocation();
   const [formData, setFormData] = useState({});
-
+  const [studentCount, setStudentCount] = useState(0);
+  const [totalCredentials, setTotalCredentials] = useState(0);
+  const [verifiedCredentials, setVerifiedCredentials] = useState(0);
+  
   useEffect(() => {
     const storedUserDetails = localStorage.getItem("userDetails");
     if (storedUserDetails) {
@@ -29,6 +32,8 @@ const Dashboard1 = () => {
     month: "long",
     day: "numeric",
   });
+
+  
   
 
   return (
@@ -86,7 +91,7 @@ const Dashboard1 = () => {
     </div>
     <div>
       <span className="bg-[#C4E0AD] text-center py-1 px-2 rounded-lg block w-fit mx-auto">
-        {student.status || "Verified"}
+        {student.status || "Pending"}
       </span>
     </div>
   </div>

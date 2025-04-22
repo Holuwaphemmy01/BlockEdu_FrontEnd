@@ -15,13 +15,13 @@ const Credentails = () => {
     const studentData = {
       matricId: document.getElementById("matricId").value,
       email: document.getElementById("email").value,
-      studentName: document.getElementById("studentName").value,
-      institutionName: document.getElementById("name").value,
-      institutionId: document.getElementById("ID").value,
+   studentName: `${document.getElementById("lastname").value} ${document.getElementById("firstname").value}`,
+
       credentials: selectedCredentials,
       dateIssued: new Date().toISOString(),
-      status: "Pending",
+      status: "verified",
     };
+    
 
     const existingStudents = JSON.parse(localStorage.getItem("students")) || [];
     existingStudents.push(studentData);
@@ -29,7 +29,7 @@ const Credentails = () => {
 
     alert("Student added successfully");
 
-    navigate("/dashboard1"); // Redirect AFTER storing
+    navigate("/dashboard1"); 
   };
 
   return (
@@ -44,27 +44,27 @@ const Credentails = () => {
         <form className="space-y-6" onSubmit={handleSubmit}>
           <div className="flex flex-col md:flex-row gap-4">
             <div className="mb-4 flex-1">
-              <label htmlFor="matricId" className="mb-1 text-sm font-semibold text-gray-700 block">
-                Matriculation ID
+              <label htmlFor="firstname" className="mb-1 text-sm font-semibold text-gray-700 block">
+                Student First Name
               </label>
               <input
                 type="text"
-                id="matricId"
+                id="firstname"
                 required
-                placeholder="Enter Matriculation ID"
+                placeholder="Enter First Name"
                 className="w-full h-14 border border-gray-300 rounded-lg px-4 py-2"
               />
             </div>
 
             <div className="mb-4 flex-1">
-              <label htmlFor="studentName" className="mb-1 text-sm font-semibold text-gray-700 block">
-                Student Name
+              <label htmlFor="lastname" className="mb-1 text-sm font-semibold text-gray-700 block">
+                Student Last Name
               </label>
               <input
                 type="text"
-                id="studentName"
+                id="lastname"
                 required
-                placeholder="Enter Student Name"
+                placeholder="Enter Last Name"
                 className="w-full h-14 border border-gray-300 rounded-lg px-4 py-2"
               />
             </div>
@@ -83,33 +83,23 @@ const Credentails = () => {
                 className="w-full h-14 border border-gray-300 rounded-lg px-4 py-2"
               />
             </div>
-
             <div className="mb-4 flex-1">
-              <label htmlFor="name" className="mb-1 text-sm font-semibold text-gray-700 block">
-                Institution Name
+              <label htmlFor="matricId" className="mb-1 text-sm font-semibold text-gray-700 block">
+                Matriculation ID
               </label>
               <input
                 type="text"
-                id="name"
+                id="matricId"
                 required
-                placeholder="Institution name"
+                placeholder="Enter Matriculation ID"
                 className="w-full h-14 border border-gray-300 rounded-lg px-4 py-2"
               />
             </div>
+
+
           </div>
 
-          <div className="mb-4">
-            <label htmlFor="ID" className="mb-1 text-sm font-semibold text-gray-700 block">
-              Institution ID
-            </label>
-            <input
-              type="text"
-              id="ID"
-              required
-              placeholder="Institution ID"
-              className="w-full h-14 border border-gray-300 rounded-lg px-4 py-2"
-            />
-          </div>
+         
 
           <div className="space-y-4">
             <h3 className="text-lg font-semibold">Select Document Type:</h3>

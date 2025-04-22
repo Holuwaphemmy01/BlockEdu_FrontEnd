@@ -6,6 +6,7 @@ import Signup from "./component/Signup"
 import Credentials from "./component/Credentials";
 import Sidebar from "./component/Sidebar"
 import Dashboard1 from "./Page/Dashboard1";
+import Dashboard2 from "./Page/Dashboard2";
 
 const App = ()=>{
   return(
@@ -17,6 +18,7 @@ const App = ()=>{
         <Route path="/credentials" element={<Credentials/>}/>
         <Route path="/sidebar" element={<Sidebar/>}/>
         <Route path="/dashboard1" element={<Dashboard1/>}/>
+        <Route path="/dashboard2" element={<Dashboard2/>}/>
 
       </Routes>
 
