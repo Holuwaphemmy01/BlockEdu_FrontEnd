@@ -224,9 +224,9 @@ const Landingpage = () => {
           </h4>
 
           <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-6 mt-10 max-w-md mx-auto">
-            <button className="text-xs md:text-base w-[230px] md:w-[200px] text-white rounded-2xl py-3 font-semibold btn-primary hover:bg-blue-700 hover:text-blue-200 transition duration-300">
+           <Link to="/login"> <button className="text-xs md:text-base w-[230px] md:w-[200px] text-white rounded-2xl py-3 font-semibold btn-primary hover:bg-blue-700 hover:text-blue-200 transition duration-300">
               Get Started
-            </button>
+            </button></Link>
             <button
               onClick={() =>
                 document
