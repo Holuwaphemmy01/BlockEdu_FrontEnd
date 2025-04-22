@@ -8,6 +8,9 @@ import Sidebar from "./component/Sidebar"
 import Dashboard1 from "./Page/Dashboard1";
 import Dashboard2 from "./Page/Dashboard2";
 import Loader from "./component/Loader";
+import About from "./component/About";
+import Contact from "./component/Contact";
+
 
 const App = ()=>{
   return(
@@ -21,6 +24,8 @@ const App = ()=>{
         <Route path="/dashboard1" element={<Dashboard1/>}/>
         <Route path="/dashboard2" element={<Dashboard2/>}/>
         <Route path="loader" element={<Loader/>}/>
+        <Route path="about" element={<About/>}/>
+        <Route path="contact" element={<Contact/>}/>
 
       </Routes>
 

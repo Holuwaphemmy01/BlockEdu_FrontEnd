@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import Sidebar2 from "../component/Sidebar2";
 import { FiLogOut } from "react-icons/fi";
 import wine from "../assets/wine.png";
 import { IoIosNotifications } from "react-icons/io";
 
 const Dashboard2 = () => {
+    const [open, setOpen] = useState(false);
+    const toggleDropdown = ()=> setOpen(!open)
     return(
         <div className="flex flex-col md:flex-row h-screen overflow-hidden">
       <Sidebar2 />
@@ -41,9 +43,23 @@ const Dashboard2 = () => {
     <p className="font-bold">Share Credentials</p>
     <p>Generate a secure link or QR code to share your credentials</p>
   </div>
-  <div className="flex justify-end mt-4">
-    <button className="bg-[#4CAF50] text-white w-28 h-9 rounded-md">Generate</button>
-  </div>
+  <div className="relative flex justify-end mt-4">
+      <button
+        onClick={toggleDropdown}
+        className="bg-[#4CAF50] text-white w-28 h-9 rounded-md"
+      >
+        Generate
+      </button>
+
+      {open && (
+        <div className="absolute mt-2 right-0 w-40 bg-white border border-gray-200 rounded-md shadow-lg z-50">
+          <ul className="text-left">
+            <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Generate Link</li>
+            <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Generate QR Code</li>
+          </ul>
+        </div>
+      )}
+    </div>
 </div>
 
 </div>

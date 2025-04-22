@@ -1,4 +1,8 @@
-import React from "react";
+
+
+
+import React, { useState, useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 import logo from "../assets/logo.png";
 import { IoClose } from "react-icons/io5";
 import { SiTicktick } from "react-icons/si";
@@ -8,15 +12,13 @@ import { FaGraduationCap } from "react-icons/fa6";
 import { BiQrScan } from "react-icons/bi";
 import { IoShieldCheckmarkSharp } from "react-icons/io5";
 import { IoMdCheckmarkCircle } from "react-icons/io";
-import { useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import Footer from "../component/Footer";
-import { Link } from "react-router-dom";
-import { useEffect } from "react";
+import Loader from "../component/Loader";
+import Contact from "../component/Contact";
 import cap from "../assets/cap.jpg";
 import cap1 from "../assets/cap1.jpg";
 import cap3 from "../assets/cap3.jpg";
-import Loader from "../component/Loader";
 
 const images = [
   {
@@ -41,6 +43,10 @@ const images = [
 
 const Landingpage = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [isOpen, setIsOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const contactRef = useRef(null);
+  
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -50,15 +56,9 @@ const Landingpage = () => {
     return () => clearInterval(interval);
   }, []);
 
-  const { src, title, subtitle } = images[currentImageIndex];
-
-  const [isOpen, setIsOpen] = useState(false);
-  const handleSubmit = (event) => {};
   useEffect(() => {
     document.body.style.overflow = isOpen ? "hidden" : "auto";
   }, [isOpen]);
-
-  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -67,9 +67,14 @@ const Landingpage = () => {
 
     return () => clearTimeout(timer);
   }, []);
+
   if (isLoading) {
     return <Loader />;
   }
+
+  const scrollToContact = () => {
+    contactRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
 
   const broken = [
     {
@@ -80,12 +85,12 @@ const Landingpage = () => {
       icon: <BiSolidError className="text-[#F6A842]" size={30} />,
       title: "Fraudulent certificates",
     },
-
     {
       icon: <BiSolidError className="text-[#f6a842]" size={30} />,
       title: "No real-time verification",
     },
   ];
+
   const fix = [
     {
       icon: <TiTick className="text-[#899B8A]" size={30} />,
@@ -100,11 +105,13 @@ const Landingpage = () => {
       title: "No real-time verification",
     },
   ];
+
   const handleDone = (e) => {
     e.preventDefault();
-
     alert("Form submitted");
   };
+
+  const { src, title, subtitle } = images[currentImageIndex];
 
   return (
     <div className="container mx-auto px-4">
@@ -121,8 +128,13 @@ const Landingpage = () => {
 
             <nav className="hidden sm:flex">
               <ul className="flex space-x-6 text-lg font-medium text-[#2C2C2C]">
-                <li className="cursor-pointer hover:text-blue-700">About</li>
-                <li className="cursor-pointer hover:text-blue-700">Contact</li>
+                <Link to="/about"><li className="cursor-pointer hover:text-blue-700">About</li></Link>
+                <li
+                  className="cursor-pointer hover:text-blue-700"
+                  onClick={scrollToContact}
+                >
+                  Contact
+                </li>
                 <Link to="login">
                   <li className="cursor-pointer hover:text-blue-700">Login</li>
                 </Link>
@@ -151,15 +163,20 @@ const Landingpage = () => {
           </div>
 
           <ul className="flex flex-col px-6 space-y-6 text-lg font-medium text-[#2C2C2C] mt-9">
-            <li
+           <Link to="/about">
+           <li
               className="cursor-pointer hover:text-blue-700"
               onClick={() => setIsOpen(false)}
             >
               About
             </li>
-            <li
+           </Link>
+           <li
               className="cursor-pointer hover:text-blue-700"
-              onClick={() => setIsOpen(false)}
+              onClick={() => {
+                scrollToContact();
+                setIsOpen(false);
+              }}
             >
               Contact
             </li>
@@ -283,100 +300,7 @@ const Landingpage = () => {
         </div>
       </div>
 
-      <div className="flex-1 p-4 sm:p-6 md:p-8 overflow-y-auto bg-[#e0e0e0] mt-10">
-        <h1 className="text-[#4CAF50] font-bold text-xl sm:text-2xl md:text-3xl mb-6">
-          Get in touch, Quick response
-        </h1>
-        <h4>All fields are required</h4>
-
-        <form className="space-y-6" onSubmit={handleSubmit}>
-          <div className="flex flex-col md:flex-row gap-4 mt-5">
-            <div className="mb-4 flex-1">
-              <label
-                htmlFor="firstname"
-                className="mb-1 text-sm font-semibold text-gray-700 block"
-              >
-                First Name
-              </label>
-              <input
-                type="text"
-                id="firstname"
-                required
-                className="w-full h-14 border border-gray-300 rounded-lg px-4 py-2 outline-none"
-              />
-            </div>
-
-            <div className="mb-4 flex-1">
-              <label
-                htmlFor="lastname"
-                className="mb-1 text-sm font-semibold text-gray-700 block"
-              >
-                Last Name
-              </label>
-              <input
-                type="text"
-                id="lastname"
-                required
-                className="w-full h-14 border border-gray-300 rounded-lg px-4 py-2 outline-none"
-              />
-            </div>
-          </div>
-
-          <div className="flex flex-col md:flex-row gap-4">
-            <div className="mb-4 flex-1">
-              <label
-                htmlFor="email"
-                className="mb-1 text-sm font-semibold text-gray-700 block"
-              >
-                Email Address
-              </label>
-              <input
-                type="email"
-                id="email"
-                required
-                className="w-full h-14 border border-gray-300 rounded-lg px-4 py-2 outline-none"
-              />
-            </div>
-            <div className="mb-4 flex-1">
-              <label
-                htmlFor="matricId"
-                className="mb-1 text-sm font-semibold text-gray-700 block"
-              >
-                Phone Number
-              </label>
-              <input
-                type="text"
-                id="matricId"
-                required
-                className="w-full h-14 border border-gray-300 rounded-lg px-4 py-2 outline-none"
-              />
-            </div>
-          </div>
-          <div>
-            <label
-              htmlFor="message"
-              className="mb-1 text-sm font-semibold text-gray-700 block"
-            >
-              Message
-            </label>
-            <textarea
-              id="message"
-              required
-              placeholder="Enter your message here..."
-              className="w-full h-32 border border-gray-300 rounded-lg px-4 py-2 outline-none"
-            ></textarea>
-          </div>
-
-          <div className="space-y-4">
-            <button
-              type="submit"
-              className="bg-[#1E88E5] text-white px-6 py-2 rounded hover:bg-blue-700 transition"
-            >
-              Submit
-            </button>
-          </div>
-        </form>
-      </div>
+      <div ref={contactRef}><Contact /></div>
       <Footer />
     </div>
   );
