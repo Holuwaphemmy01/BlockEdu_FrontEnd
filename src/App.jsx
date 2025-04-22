@@ -7,6 +7,7 @@ import Credentials from "./component/Credentials";
 import Sidebar from "./component/Sidebar"
 import Dashboard1 from "./Page/Dashboard1";
 import Dashboard2 from "./Page/Dashboard2";
+import Loader from "./component/Loader";
 
 const App = ()=>{
   return(
@@ -19,6 +20,7 @@ const App = ()=>{
         <Route path="/sidebar" element={<Sidebar/>}/>
         <Route path="/dashboard1" element={<Dashboard1/>}/>
         <Route path="/dashboard2" element={<Dashboard2/>}/>
+        <Route path="loader" element={<Loader/>}/>
 
       </Routes>
 

@@ -5,9 +5,9 @@ import 'ldrs/react/LineSpinner.css'
 
 const Loader = () => {
   return (
-    <div className="flex items-center justify-center h-screen bg-white">
+    <div className="flex items-center justify-center h-screen bg-gray-600 ">
       <LineSpinner
-        size={40}
+        size={60}
         stroke={3}
         speed={1}
         color="black"

@@ -49,7 +49,7 @@ const Footer = () => {
         <div className="mt-4 md:mt-0">
           <p>Contact us at:</p>
           <p>Email: support@blockedu.com</p>
-          <p>Phone: +1 234 567 890</p>
+          <p>Phone: 808643422145</p>
         </div>
 
         
@@ -86,7 +86,7 @@ const Footer = () => {
       {showButton && (
         <button
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-          className="fixed bottom-6 right-6 bg-blue-500 text-white p-3 rounded-full shadow-lg hover:bg-blue-700 transition duration-300"
+          className="fixed bottom-6 right-10 bg-blue-500 text-white p-3 rounded-full shadow-lg hover:bg-blue-700 transition duration-300"
         >
           ↑
         </button>
