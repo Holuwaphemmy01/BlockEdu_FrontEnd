@@ -10,6 +10,7 @@ import Dashboard2 from "./Page/Dashboard2";
 import Loader from "./component/Loader";
 import About from "./component/About";
 import Contact from "./component/Contact";
+import Logos from "./component/Logos";
 
 
 const App = ()=>{
@@ -26,6 +27,7 @@ const App = ()=>{
         <Route path="loader" element={<Loader/>}/>
         <Route path="about" element={<About/>}/>
         <Route path="contact" element={<Contact/>}/>
+        <Route path="logo" element={<Logos/>}/>
 
       </Routes>
 

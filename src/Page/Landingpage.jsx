@@ -19,6 +19,7 @@ import Contact from "../component/Contact";
 import cap from "../assets/cap.jpg";
 import cap1 from "../assets/cap1.jpg";
 import cap3 from "../assets/cap3.jpg";
+import Logos from "../component/Logos";
 
 const images = [
   {
@@ -239,7 +240,11 @@ const Landingpage = () => {
             </button>
           </div>
         </div>
+      
       </div>
+     
+         
+    
       <div className="bg-[#757575] w-full mt-10 flex flex-col md:flex-row md:space-x-20 space-y-10 md:space-y-0 items-center justify-center px-4 py-8">
         <div className="w-full max-w-md">
           <h1 className="flex justify-center items-center gap-2 text-white text-center text-lg md:text-xl font-semibold">
@@ -280,6 +285,7 @@ const Landingpage = () => {
           <div className="border border-dashed w-full mt-10"></div>
         </div>
       </div>
+      <Logos/>
       <div id="how-it-works" className="mt-14 px-4">
         <h1 className="text-2xl md:text-4xl font-extrabold text-[#2C2C2C] text-center md:text-left mb-10">
           How it Works
