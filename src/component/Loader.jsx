@@ -5,7 +5,7 @@ import 'ldrs/react/LineSpinner.css'
 
 const Loader = () => {
   return (
-    <div className="flex items-center justify-center h-screen bg-gray-600 ">
+    <div className="flex items-center justify-center h-screen bg-[f5f5f5] ">
       <LineSpinner
         size={60}
         stroke={3}
