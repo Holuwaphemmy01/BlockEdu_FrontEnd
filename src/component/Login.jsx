@@ -53,13 +53,12 @@ export const Login = () => {
   const handleSubmit=async(event)=>{
     event.preventDefault();
 
-    // const data ={
-    //   email:formData.email,
-    //   password: formData.password
-    // }
+   
+
+  
     try {
 
-      // console.log(data)
+  
       const response = await axios.post('http://localhost:8000/auth/login', formData);
 
       console.log(response)
@@ -77,62 +76,26 @@ export const Login = () => {
         navigate("/dashboard1");
         }      
        else{
-        console.log("Navigating to dashboard1...");
         alert("Login Successful")
-        localStorage.setItem("data",response.data)
+        localStorage.setItem("firstName", response.data.firstName);
+        localStorage.setItem("lastName", response.data.lastName);
+        localStorage.setItem("studentId", response.studentId);
+        localStorage.setItem("studentEmail", response.email);
         navigate("/dashboard2");
        }
       }      
       else{
         console.log(response.data.status)
-        setError(response);
+  
+        setError(response.data.message);
       }
       
-    } catch (error ) {
-      console.log(error)
+    } catch (error) {
+      console.log(error.message)
+      setError(error.message)
     }
   }
 
-  // const handleSubmit = async (event) => {
-  //   event.preventDefault();
-  //   const errors = validateForm();
-
-  //   if (Object.keys(errors).length === 0) {
-  //     setSubmitting(true);
-  //     try {
-  //       await new Promise((res) => setTimeout(res, 1000));
-
-
-  //       const storedUsers = JSON.parse(localStorage.getItem("registeredUsers")) || [];
-  //       const matchedUser = storedUsers.find(
-  //         (user) =>
-  //           user.email === formData.email &&
-  //           user.password === formData.password
-  //       );
-
-  //       if (!matchedUser) {
-  //         setError({
-  //           email: "Invalid email or password",
-  //           password: "Invalid email or password",
-  //         });
-  //         return;
-  //       }
-
-  //       localStorage.setItem("userDetails", JSON.stringify(matchedUser));
-  //       console.log("Login successful", matchedUser);
-        
-  //       // Clear the form after successful login
-  //       setFormData({ email: "", password: "" });
-
-  //       navigate("/dashboard1", { state: matchedUser });
-
-  //     } finally {
-  //       setSubmitting(false);
-  //     }
-  //   } else {
-  //     setError(errors);
-  //   }
-  // };
 
   return (
     <div className="max-w-[700px] mx-auto bg-white p-8 rounded-2xl shadow-lg mt-10">
