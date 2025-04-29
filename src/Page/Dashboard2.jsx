@@ -1,19 +1,54 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom"; // Import for navigation
+import { useNavigate } from "react-router-dom";
+import axios from "axios"; 
 import Sidebar2 from "../component/Sidebar2";
-import { FiLogOut } from "react-icons/fi";
+import { FiLogOut, FiCopy } from "react-icons/fi";
 import wine from "../assets/wine.png";
 import { IoIosNotifications } from "react-icons/io";
 
 const Dashboard2 = () => {
     const [open, setOpen] = useState(false);
+    const [modalOpen, setModalOpen] = useState(false);
+    const [url, setUrl] = useState(""); // State for the generated URL
+
     const toggleDropdown = () => setOpen(!open);
 
-    const navigate = useNavigate(); // Hook for navigation
+    const navigate = useNavigate();
 
     const handleLogout = () => {
-        localStorage.clear(); // Clears all local storage data
-        navigate("/Landingpage"); // Routes to the landing page
+        localStorage.clear();
+        navigate("/Landingpage");
+    };
+
+    const payload ={
+      "studentId": localStorage.getItem("studentId"),
+      "firstName": localStorage.getItem("firstName"),
+      "lastName": localStorage.getItem("lastName"),
+      "email": localStorage.getItem("email")
+    };
+
+    const token = localStorage.getItem("token");
+
+    const handleGenerateLink = async () => {
+        try {
+
+            const response = await axios.post("http://localhost:8000/student/generate_url", payload, {
+
+                headers: {
+                  Authorization: `Bearer ${token}`,
+                  "Content-Type": "application/json", 
+                },
+            });
+            setUrl("www.blockedu-credentials"+response.data); 
+            setModalOpen(true);
+        } catch (error) {
+            console.error("Error generating link:", error);
+        }
+    };
+
+    const handleCopyToClipboard = () => {
+        navigator.clipboard.writeText(url); 
+        alert("URL copied to clipboard!"); 
     };
 
     return (
@@ -24,7 +59,6 @@ const Dashboard2 = () => {
                     <h1 className="text-[#4CAF50] font-bold text-xl md:text-2xl">Dashboard</h1>
                     <div className="flex items-center gap-4">
                         <IoIosNotifications size={20} />
-                        {/* Add onClick handler for Logout */}
                         <p className="flex cursor-pointer" onClick={handleLogout}>
                             <FiLogOut className="mt-1" />
                             Logout
@@ -35,7 +69,7 @@ const Dashboard2 = () => {
                     <img src={wine} alt="cap" className="w-28" />
                     <div>
                         <p className="sm:text-[30px] font-extrabold text-[20px]">
-                            Welcome {localStorage.getItem("firstName") || Guest} {localStorage.getItem("lastName")}
+                            Welcome {localStorage.getItem("firstName") || "Guest"} {localStorage.getItem("lastName")}
                         </p>
                         <h3>Manage your academic credentials securely on the blockchain</h3>
                     </div>
@@ -60,23 +94,32 @@ const Dashboard2 = () => {
                         </div>
                         <div className="relative flex justify-end mt-4">
                             <button
-                                onClick={toggleDropdown}
+                                onClick={handleGenerateLink}
                                 className="bg-[#4CAF50] text-white w-28 h-9 rounded-md"
                             >
-                                Generate
+                                Generate Link
                             </button>
-                            {open && (
-                                <div className="absolute mt-2 right-0 w-40 bg-white border border-gray-200 rounded-md shadow-lg z-50">
-                                    <ul className="text-left">
-                                        <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Generate Link</li>
-                                        <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Generate QR Code</li>
-                                    </ul>
-                                </div>
-                            )}
                         </div>
                     </div>
                 </div>
             </div>
+            {modalOpen && (
+                <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+                    <div className="bg-white p-6 rounded-md shadow-lg">
+                        <p className="font-bold mb-4">Your Generated Link:</p>
+                        <div className="flex items-center gap-2 bg-gray-100 p-2 rounded-md">
+                            <span className="text-sm">{url}</span>
+                            <FiCopy className="cursor-pointer" onClick={handleCopyToClipboard} />
+                        </div>
+                        <button
+                            className="mt-4 bg-[#1E88E5] text-white w-full h-9 rounded-md"
+                            onClick={() => setModalOpen(false)}
+                        >
+                            Close
+                        </button>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };

@@ -79,8 +79,9 @@ export const Login = () => {
         alert("Login Successful")
         localStorage.setItem("firstName", response.data.firstName);
         localStorage.setItem("lastName", response.data.lastName);
-        localStorage.setItem("studentId", response.studentId);
-        localStorage.setItem("studentEmail", response.email);
+        localStorage.setItem("studentId", response.data.studentId);
+        localStorage.setItem("studentEmail", response.data.email);
+        localStorage.setItem("token", response.data.token)
         navigate("/dashboard2");
        }
       }      
