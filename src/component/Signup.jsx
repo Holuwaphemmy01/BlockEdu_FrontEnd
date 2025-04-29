@@ -4,6 +4,7 @@ import { MdEmail, MdDriveFileRenameOutline, MdLocationOn } from "react-icons/md"
 import { GiConfirmed } from "react-icons/gi";
 import logo from "../assets/logo.png";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -14,9 +15,9 @@ const Signup = () => {
     state: "",
     city: "",
     admin: "",
-    email: "",
-    phone: "",
-    type: "",
+    officialMail: "",
+    officialPhone: "",
+    institutionType: "",
     password: "",
     confirmPassword: "",
   });
@@ -31,6 +32,32 @@ const Signup = () => {
     }));
   };
 
+  
+
+
+  const handleSubmit = async()=>{
+    try{
+      console.log(formData)
+
+      const response = await axios.post('http://localhost:8000/auth/institution/register', formData);
+      if (response.status === 201){
+        console.log("Navigating to login...");
+        alert("Registration Successful")
+        navigate("/login", { state: formData });
+      }
+      
+      else{
+        setError(response);
+      }
+  
+  }catch (error){
+      setError(error.response?.data?.message || 'Registration failed. Please try again.');
+  }
+ 
+
+  }
+  
+
   const validateForm = () => {
     let errors = {};
 
@@ -40,19 +67,19 @@ const Signup = () => {
     if (!formData.city) errors.city = "City is required";
     if (!formData.admin) errors.admin = "Admin name is required";
 
-    if (!formData.email) {
-      errors.email = "Email is required";
-    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      errors.email = "Email is invalid";
+    if (!formData.officialMail) {
+      errors.officialMail = "Email is required";
+    } else if (!/\S+@\S+\.\S+/.test(formData.officialMail)) {
+      errors.officialMail = "Email is invalid";
     }
 
-    if (!formData.phone) {
-      errors.phone = "Phone number is required";
-    } else if (!/^\d{10}$/.test(formData.phone)) {
-      errors.phone = "Phone number must be 10 digits";
+    if (!formData.officialPhone) {
+      errors.officialPhone = "Phone number is required";
+    } else if (!/^\d{10}$/.test(formData.officialPhone)) {
+      errors.officialPhone = "Phone number must be 10 digits";
     }
 
-    if (!formData.type) errors.type = "Institution type is required";
+    if (!formData.institutionType) errors.institutionType = "Institution type is required";
 
     if (!formData.password) {
       errors.password = "Password is required";
@@ -70,34 +97,34 @@ const Signup = () => {
     return Object.keys(errors).length === 0;
   };
 
-  const handleSubmit = () => {
-    if (validateForm()) {
-      const newUser = {
-        email: formData.email,
-        name: formData.name,
-        password: formData.password,
-        type: formData.type,
+  // const handleSubmit = () => {
+  //   if (validateForm()) {
+  //     const newUser = {
+  //       email: formData.email,
+  //       name: formData.name,
+  //       password: formData.password,
+  //       type: formData.type,
 
-      };
+  //     };
   
-      const existingUsers = JSON.parse(localStorage.getItem("registeredUsers")) || [];
+  //     const existingUsers = JSON.parse(localStorage.getItem("registeredUsers")) || [];
   
-      const userExists = existingUsers.some(user => user.email === newUser.email);
-      if (userExists) {
-        alert("User already registered. Please log in.");
-        navigate("/login");
-        return;
-      }
+  //     const userExists = existingUsers.some(user => user.email === newUser.email);
+  //     if (userExists) {
+  //       alert("User already registered. Please log in.");
+  //       navigate("/login");
+  //       return;
+  //     }
   
-      existingUsers.push(newUser);
-      localStorage.setItem("registeredUsers", JSON.stringify(existingUsers));
+  //     existingUsers.push(newUser);
+  //     localStorage.setItem("registeredUsers", JSON.stringify(existingUsers));
   
-      alert("Registration successful");
-      navigate("/dashboard1", { state: formData });
-    } else {
-      alert("Form submission failed");
-    }
-  };
+  //     alert("Registration successful");
+  //     navigate("/dashboard1", { state: formData });
+  //   } else {
+  //     alert("Form submission failed");
+  //   }
+  // };
   
   
   const states = [
@@ -197,13 +224,13 @@ const Signup = () => {
           </label>
           <input
             type="email"
-            name="email"
-            value={formData.email}
+            name="officialMail"
+            value={formData.officialMail}
             onChange={handleChange}
             placeholder="your@email.com"
             className="h-14 border border-gray-300 rounded-lg px-4 py-2"
           />
-          {error.email && <p className="text-red-500 text-xs">{error.email}</p>}
+          {error.officialMail && <p className="text-red-500 text-xs">{error.officialMail}</p>}
         </div>
 
   
@@ -217,9 +244,9 @@ const Signup = () => {
             </span>
             <input
               type="tel"
-              name="phone"
+              name="officialPhone"
               maxLength={10}
-              value={formData.phone}
+              value={formData.officialPhone}
               onChange={handleChange}
               placeholder="8123456789"
               className="h-14 w-full border border-l-0 border-gray-300 rounded-r-lg px-4 py-2"
@@ -234,8 +261,8 @@ const Signup = () => {
             <MdLocationOn className="mt-1" /> Type
           </label>
           <select
-            name="type"
-            value={formData.type}
+            name="institutionType"
+            value={formData.institutionType}
             onChange={handleChange}
             className="h-14 border border-gray-300 rounded-lg px-4 py-2"
           >

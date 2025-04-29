@@ -43,8 +43,8 @@ const Dashboard1 = () => {
         <div className="flex flex-col sm:flex-row sm:justify-between items-start sm:items-center gap-4 mb-6">
           <h1 className="text-[#4CAF50] font-bold text-xl md:text-2xl">Dashboard</h1>
           <div>
-            <p><strong>Email:</strong> {formData?.email || "Not Available"}</p>
-            <p><strong>Institution Name:</strong> {formData?.name || "Not Available"}</p>
+            <p><strong>Email:</strong> {localStorage.getItem("officialMail") || "Not Available"}</p>
+            <p><strong>Institution Name:</strong> {localStorage.getItem("institutionName")|| "Not Available"}</p>
           </div>
         </div>
 

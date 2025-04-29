@@ -12,7 +12,7 @@ const Sidebar = () => {
   return (
     <>
       {/* Toggle Button for small screens */}
-      <div className="md:hidden p-4 bg-[#2C2C2C] text-white flex justify-between items-center">
+      <div className="md:hidden p-4  text-white flex justify-between items-center">
         <img src={logo} alt="blockedu" className="w-[120px]" />
         <button onClick={() => setIsOpen(!isOpen)} className="text-2xl">
           <FaBars />
