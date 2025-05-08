@@ -77,11 +77,13 @@ export const Login = () => {
         }      
        else{
         alert("Login Successful")
+        console.log(response.data);
         localStorage.setItem("firstName", response.data.firstName);
         localStorage.setItem("lastName", response.data.lastName);
         localStorage.setItem("studentId", response.data.studentId);
         localStorage.setItem("studentEmail", response.data.email);
         localStorage.setItem("token", response.data.token)
+        localStorage.setItem("studentFirstLogin", response.data.studentFirstLogin)
         navigate("/dashboard2");
        }
       }      
@@ -187,3 +189,187 @@ export const Login = () => {
 };
 
 export default Login;
+
+
+// import React, { useState } from "react";
+// import logo from "../assets/logo.png";
+// import { MdEmail } from "react-icons/md";
+// import { FaLock } from "react-icons/fa";
+// import { Link, useNavigate } from "react-router-dom";
+// import axios from "axios";
+
+// export const Login = () => {
+//   const navigate = useNavigate();
+//   const [formData, setFormData] = useState({ email: "", password: "" });
+//   const [error, setError] = useState({});
+//   const [submitting, setSubmitting] = useState(false);
+//   const [showModal, setShowModal] = useState(false);
+//   const [passwordData, setPasswordData] = useState({ newPassword: "", confirmPassword: "" });
+
+//   const handleChange = (event) => {
+//     const { name, value } = event.target;
+//     setFormData((prev) => ({ ...prev, [name]: value }));
+//   };
+
+//   const handlePasswordChange = (event) => {
+//     const { name, value } = event.target;
+//     setPasswordData((prev) => ({ ...prev, [name]: value }));
+//   };
+
+//   const handleSubmit = async (event) => {
+//     event.preventDefault();
+//     try {
+//       const response = await axios.post("http://localhost:8000/auth/login", formData);
+
+//       if (response.status === 200) {
+//         localStorage.setItem("token", response.data.token);
+//         localStorage.setItem("studentEmail", response.data.email);
+
+//         if (response.data.role === "ROLE_INSTITUTION") {
+//           alert("Login Successful");
+//           navigate("/dashboard1");
+//         } else {
+//           alert("Login Successful");
+
+//           if (response.data.studentFirstLogin) {
+//             setShowModal(true); // Open modal for first-time login
+//           } else {
+//             navigate("/dashboard2");
+//           }
+//         }
+//       } else {
+//         setError(response.data.message);
+//       }
+//     } catch (error) {
+//       setError(error.message);
+//     }
+//   };
+
+//   const handlePasswordSubmit = async () => {
+//     if (passwordData.newPassword !== passwordData.confirmPassword) {
+//       alert("Passwords do not match!");
+//       return;
+//     }
+
+//     try {
+//       const response = await axios.post("http://localhost:8000/auth/update-password", {
+//         email: localStorage.getItem("studentEmail"),
+//         newPassword: passwordData.newPassword,
+//       });
+
+//       if (response.status === 200) {
+//         alert("Password updated successfully!");
+//         setShowModal(false);
+//         navigate("/dashboard2");
+//       } else {
+//         alert("Error updating password!");
+//       }
+//     } catch (error) {
+//       alert("Failed to update password: " + error.message);
+//     }
+//   };
+
+//   return (
+//     <div className="max-w-[700px] mx-auto bg-white p-8 rounded-2xl shadow-lg mt-10">
+//       {/* Logo Section */}
+//       <div className="flex justify-center">
+//         <img src={logo} alt="blockedu" className="w-[150px] h-auto" />
+//       </div>
+
+//       <h1 className="text-[#464A4C] font-extrabold text-center text-xl sm:text-2xl mt-6">
+//         Empowering Education with Blockchain Security
+//       </h1>
+
+//       {/* Login Form */}
+//       <form onSubmit={handleSubmit} className="space-y-6 mt-9">
+//         <div className="flex flex-col">
+//           <label htmlFor="email" className="flex mb-1 text-sm font-semibold text-gray-700">
+//             <MdEmail className="mt-1 mr-1" /> Email
+//           </label>
+//           <input
+//             type="email"
+//             id="email"
+//             name="email"
+//             value={formData.email}
+//             onChange={handleChange}
+//             placeholder="your@email.com"
+//             required
+//             className={`h-14 border ${error.email ? "border-red-500" : "border-gray-300"} rounded-lg px-4 py-2 focus:outline-none focus:ring-2 ${
+//               error.email ? "focus:ring-red-500" : "focus:ring-blue-500"
+//             }`}
+//           />
+//           {error.email && <p className="text-red-500 text-sm mt-1">{error.email}</p>}
+//         </div>
+
+//         <div className="flex flex-col">
+//           <label htmlFor="password" className="mb-1 text-sm font-semibold text-gray-700 flex">
+//             <FaLock className="mt-1 mr-1" /> Password
+//           </label>
+//           <input
+//             type="password"
+//             id="password"
+//             name="password"
+//             value={formData.password}
+//             onChange={handleChange}
+//             placeholder="••••••••"
+//             className={`h-14 border ${error.password ? "border-red-500" : "border-gray-300"} rounded-lg px-4 py-2 focus:outline-none focus:ring-2 ${
+//               error.password ? "focus:ring-red-500" : "focus:ring-blue-500"
+//             }`}
+//           />
+//           {error.password && <p className="text-red-500 text-sm mt-1">{error.password}</p>}
+//         </div>
+
+//         <button
+//           type="submit"
+//           disabled={submitting}
+//           className="bg-[#1E88E5] rounded-xl text-white w-full h-14 font-semibold hover:bg-blue-700 transition duration-300"
+//         >
+//           {submitting ? "Submitting..." : "Log In"}
+//         </button>
+//       </form>
+
+//       {/* Password Reset Modal */}
+//       {showModal && (
+//         <div className="fixed inset-0 flex justify-center items-center bg-gray-800 bg-opacity-50">
+//           <div className="bg-white p-6 rounded-lg shadow-lg max-w-sm w-full">
+//             <h2 className="text-xl font-bold text-center">Change Password</h2>
+//             <div className="mt-4">
+//               <input
+//                 type="password"
+//                 name="newPassword"
+//                 placeholder="New Password"
+//                 value={passwordData.newPassword}
+//                 onChange={handlePasswordChange}
+//                 className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+//               />
+//               <input
+//                 type="password"
+//                 name="confirmPassword"
+//                 placeholder="Confirm Password"
+//                 value={passwordData.confirmPassword}
+//                 onChange={handlePasswordChange}
+//                 className="w-full mt-2 border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+//               />
+//             </div>
+//             <div className="mt-4 flex justify-between">
+//               <button
+//                 onClick={handlePasswordSubmit}
+//                 className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition duration-300"
+//               >
+//                 Submit
+//               </button>
+//               <button
+//                 onClick={() => setShowModal(false)}
+//                 className="bg-gray-300 text-black px-4 py-2 rounded-lg hover:bg-gray-400 transition duration-300"
+//               >
+//                 Close
+//               </button>
+//             </div>
+//           </div>
+//         </div>
+//       )}
+//     </div>
+//   );
+// };
+
+// export default Login;

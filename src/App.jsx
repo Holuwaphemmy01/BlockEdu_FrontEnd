@@ -24,6 +24,7 @@ const App = ()=>{
         <Route path="/sidebar" element={<Sidebar/>}/>
         <Route path="/dashboard1" element={<Dashboard1/>}/>
         <Route path="/dashboard2" element={<Dashboard2/>}/>
+        {/* <Route path="/changePassword" element={<ChangePassword/>}/> */}
         <Route path="loader" element={<Loader/>}/>
         <Route path="about" element={<About/>}/>
         <Route path="contact" element={<Contact/>}/>
