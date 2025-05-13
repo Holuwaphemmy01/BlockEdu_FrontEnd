@@ -119,11 +119,10 @@ const Dashboard2 = () => {
                         Authorization: `Bearer ${token}`,
                         "Content-Type": "application/json",
                     },
-                    responseType: 'json'  // Changed back to json
+                    responseType: 'json'  
                 }
             );
             
-            // Convert base64 to blob
             const byteCharacters = atob(pdfResponse.data.file);
             const byteNumbers = new Array(byteCharacters.length);
             for (let i = 0; i < byteCharacters.length; i++) {
@@ -134,7 +133,6 @@ const Dashboard2 = () => {
             const blobUrl = URL.createObjectURL(blob);
             setFileUrl(blobUrl);
             
-            // Handle metadata from response
             const metadata = {
                 studentName: pdfResponse.data.studentName,
                 studentId: pdfResponse.data.studentId,
@@ -144,6 +142,7 @@ const Dashboard2 = () => {
                 issuanceTime: new Date(pdfResponse.data.issuanceTime).toLocaleTimeString(),
                 blockchainAddress: pdfResponse.data.blockChainAddress,
             };
+            console.log("Metadata:", metadata.studentId + " " + metadata.studentName );
     
             setCredentialData({
                 ...metadata,
@@ -257,7 +256,6 @@ const Dashboard2 = () => {
                 </button>
             </div>
 
-            {/* Modal Content */}
             <div className="flex flex-col md:flex-row flex-1 overflow-hidden">
                 <div className="w-full md:w-2/3 bg-gray-100 p-2">
                     {credentialData?.loading ? (
