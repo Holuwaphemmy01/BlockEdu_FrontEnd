@@ -4,12 +4,23 @@ import { FaHouseUser, FaBars } from "react-icons/fa";
 import { PiStudentBold } from "react-icons/pi";
 import { AiOutlineFileAdd } from "react-icons/ai";
 import { IoMdSettings } from "react-icons/io";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { LuStickyNote } from "react-icons/lu";
 import { FaHistory } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 const Sidebar2 = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const  navigate = useNavigate();
+
+  const handleLogout = (e) => {
+    e.preventDefault();
+
+    navigate("/");
+
+
+    // Add your logout logic here
+  };
 
   return (
     <>
@@ -28,7 +39,7 @@ const Sidebar2 = () => {
         <div>
           <img src={logo} alt="blockedu" className="w-[150px] h-auto mx-auto mb-12 hidden md:block" />
           <div className="flex flex-col gap-6 font-bold">
-            <Link to="/dashboard1">
+            <Link to="/dashboard2">
               <button className="flex items-center gap-3 hover:bg-[#A5A1A1] rounded-lg px-4 py-2 transition">
                 <FaHouseUser /> Dashboard
               </button>
@@ -36,18 +47,20 @@ const Sidebar2 = () => {
             <button className="flex items-center gap-3 hover:bg-[#A5A1A1] rounded-lg px-4 py-2 transition">
             <LuStickyNote />My Credentails
             </button>
-            <Link to="/credentials">
+            
               <button className="flex items-center gap-3 hover:bg-[#A5A1A1] rounded-lg px-4 py-2 transition">
               <FaHistory />Share History
               </button>
-            </Link>
+            
             <button className="flex items-center gap-3 hover:bg-[#A5A1A1] rounded-lg px-4 py-2 transition">
               <IoMdSettings /> Settings
             </button>
           </div>
         </div>
         <div className="font-bold">
-          <button className="flex items-center gap-3 hover:bg-[#A5A1A1] rounded-lg px-4 py-2 w-full transition">
+          
+          
+            <button onClick={handleLogout} className="flex items-center gap-3 hover:bg-[#A5A1A1] rounded-lg px-4 py-2 w-full transition">
             Logout
           </button>
         </div>

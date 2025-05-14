@@ -5,10 +5,18 @@ import { PiStudentBold } from "react-icons/pi";
 import { AiOutlineFileAdd } from "react-icons/ai";
 import { IoMdSettings } from "react-icons/io";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Sidebar = () => {
+  
   const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
 
+  const handleLogout = (e) => {
+    e.preventDefault();
+    navigate("/");
+
+  };
   return (
     <>
       {/* Toggle Button for small screens */}
@@ -47,7 +55,7 @@ const Sidebar = () => {
           </div>
         </div>
         <div className="font-bold">
-          <button className="flex items-center gap-3 hover:bg-[#A5A1A1] rounded-lg px-4 py-2 w-full transition">
+          <button onClick={handleLogout}  className="flex items-center gap-3 hover:bg-[#A5A1A1] rounded-lg px-4 py-2 w-full transition">
             Logout
           </button>
         </div>

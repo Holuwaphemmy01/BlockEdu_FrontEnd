@@ -88,7 +88,7 @@ const Dashboard2 = () => {
                     "Content-Type": "application/json",
                 },
             });
-            setUrl("www.blockedu-credentials" + response.data);
+            setUrl("http://localhost:5173/linkpage" + response.data);
             setModalOpen(true);
         } catch (error) {
             console.error("Error generating link:", error);
