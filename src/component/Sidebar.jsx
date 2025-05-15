@@ -19,7 +19,7 @@ const Sidebar = () => {
   };
   return (
     <>
-      {/* Toggle Button for small screens */}
+  
       <div className="md:hidden p-4  text-white flex justify-between items-center">
         <img src={logo} alt="blockedu" className="w-[120px]" />
         <button onClick={() => setIsOpen(!isOpen)} className="text-2xl">
@@ -27,7 +27,7 @@ const Sidebar = () => {
         </button>
       </div>
 
-      {/* Sidebar */}
+     
       <div
         className={`${
           isOpen ? "block" : "hidden"

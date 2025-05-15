@@ -15,11 +15,12 @@ const Sidebar2 = () => {
 
   const handleLogout = (e) => {
     e.preventDefault();
+    
 
     navigate("/");
 
 
-    // Add your logout logic here
+
   };
 
   return (

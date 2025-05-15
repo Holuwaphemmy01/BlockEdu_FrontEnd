@@ -44,7 +44,7 @@ const Dashboard2 = () => {
 
         try {
             const token = localStorage.getItem("token");
-            const response = await axios.post("http://localhost:8000/student/change-password", payload, {
+            const response = await axios.post("https://blockedu.onrender.com/student/change-password", payload, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                     "Content-Type": "application/json",
@@ -82,7 +82,7 @@ const Dashboard2 = () => {
 
     const handleGenerateLink = async () => {
         try {
-            const response = await axios.post("http://localhost:8000/student/generate_url", payload, {
+            const response = await axios.post("https://blockedu.onrender.com/student/generate_url", payload, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                     "Content-Type": "application/json",
@@ -112,7 +112,7 @@ const Dashboard2 = () => {
             };
 
             const pdfResponse = await axios.post(
-                "http://localhost:8000/student/download_credential",
+                "https://blockedu.onrender.com/student/download_credential",
                 payload,
                 {
                     headers: {

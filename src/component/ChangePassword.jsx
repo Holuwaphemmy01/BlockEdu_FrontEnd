@@ -40,7 +40,7 @@ const ChangePassword = () => {
       console.log(formData);
       const response = await axios.post("http://localhost:8000/student/change_password", formData);
       if (response.data.status === "success") {
-        //localStorage.setItem("token", response.data.token);
+        
         navigate("/dashboard2"); 
       }
       else {
@@ -51,24 +51,6 @@ const ChangePassword = () => {
       setError(error.message);
       }
 
-    // const users = JSON.parse(localStorage.getItem("registeredUsers")) || [];
-    // const updatedUsers = users.map((u) =>
-    //   u.email === user.email
-    //     ? { ...u, password: newPassword, firstLogin: false }
-    //     : u
-    // );
-
-    
-
-
-    // localStorage.setItem("registeredUsers", JSON.stringify(updatedUsers));
-    // localStorage.setItem(
-    //   "userDetails",
-    //   JSON.stringify({ ...user, password: newPassword, firstLogin: false })
-    // );
-    // navigate("/dashboard2", {
-    //   state: { ...user, password: newPassword, firstLogin: false },
-    // });
   };
 
   return (
