@@ -138,9 +138,9 @@ const Dashboard2 = () => {
                 studentId: pdfResponse.data.studentId,
                 institutionName: pdfResponse.data.institutionName,
                 institutionMotto: pdfResponse.data.institutionMotto,
-                issuanceDate: new Date(pdfResponse.data.issuanceDate).toLocaleDateString(),
-                issuanceTime: new Date(pdfResponse.data.issuanceTime).toLocaleTimeString(),
-                blockchainAddress: pdfResponse.data.blockChainAddress,
+                // issuanceDate: new Date(pdfResponse.data.issuanceDate).toLocaleDateString(),
+                // issuanceTime: new Date(pdfResponse.data.issuanceTime).toLocaleTimeString(),
+                blockchainAddress: "0xtwt7owk222sj7gs4bs200enns00r555suw529msb",
             };
             console.log("Metadata:", metadata.studentId + " " + metadata.studentName );
     
