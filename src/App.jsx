@@ -12,6 +12,8 @@ import About from "./component/About";
 import Contact from "./component/Contact";
 import Logos from "./component/Logos";
 import Linkpage from "./Page/Linkpage";
+import Sidebar2 from "./component/Sidebar2";
+
 
 
 function App() {
@@ -30,6 +32,9 @@ function App() {
         <Route path="contact" element={<Contact/>}/>
         <Route path="logo" element={<Logos/>}/>
         <Route path="/linkpage/auth/:id" element={<Linkpage />} />
+        <Route path="/sidebar2" element={<Sidebar2 />} />
+        <Route path="/landingpage" element={<Landingpage />} />
+        
       </Routes>
     </Router>
   );
