@@ -88,7 +88,7 @@ const Dashboard2 = () => {
                     "Content-Type": "application/json",
                 },
             });
-            setUrl("http://localhost:5173/linkpage" + response.data);
+            setUrl("https://block-edu-front-end.vercel.app" + response.data);
             setModalOpen(true);
         } catch (error) {
             console.error("Error generating link:", error);
