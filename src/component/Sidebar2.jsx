@@ -25,9 +25,9 @@ const Sidebar2 = () => {
 
   return (
     <>
-      <div className="md:hidden p-4 bg-[#2C2C2C] text-white flex justify-between items-center">
+      <div className="md:hidden p-4  text-white flex justify-between items-center">
         <img src={logo} alt="blockedu" className="w-[120px]" />
-        <button onClick={() => setIsOpen(!isOpen)} className="text-2xl">
+        <button onClick={() => setIsOpen(!isOpen)} className="text-2xl text-black">
           <FaBars />
         </button>
       </div>
@@ -35,7 +35,7 @@ const Sidebar2 = () => {
       <div
         className={`${
           isOpen ? "block" : "hidden"
-        } md:flex fixed md:static bg-[#2C2C2C] text-white h-full w-64 px-6 py-8 flex-col justify-between z-50 transition-all duration-300`}
+        } md:flex fixed md:static bg-gray-500 text-white h-full w-64 px-6 py-8 flex-col justify-between z-50 transition-all duration-300`}
       >
         <div>
           <img src={logo} alt="blockedu" className="w-[150px] h-auto mx-auto mb-12 hidden md:block" />

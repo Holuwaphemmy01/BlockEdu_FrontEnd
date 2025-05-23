@@ -42,7 +42,7 @@ const Credentials = () => {
     try {
      
       console.log("Form Data:", formData);
-
+      console.log("This is my token "+token);
 
       await axios.post("https://blockedu.onrender.com/institution/upload", formData, {
         headers: {
@@ -61,7 +61,7 @@ const Credentials = () => {
   };
 
   return (
-    <div className="flex flex-col md:flex-row h-screen bg-gradient-to-tr from-[#E3F2FD] to-[#275b86]">
+    <div className="flex flex-col md:flex-row h-screen ">
       <Sidebar />
       <div className="flex-1 p-4 sm:p-6 md:p-8 overflow-y-auto">
         <h1 className="text-[#4CAF50] font-bold text-xl sm:text-2xl md:text-3xl mb-6">

@@ -181,7 +181,7 @@ const Dashboard2 = () => {
                         <IoIosNotifications size={20} />
                         <p className="flex cursor-pointer" onClick={handleLogout}>
                             <FiLogOut className="mt-1" />
-                            Logout
+                            
                         </p>
                     </div>
                 </div>
