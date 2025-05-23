@@ -31,9 +31,10 @@ function App() {
         <Route path="about" element={<About/>}/>
         <Route path="contact" element={<Contact/>}/>
         <Route path="logo" element={<Logos/>}/>
-        <Route path="/linkpage/auth/:id" element={<Linkpage />} />
+        {/* //<Route path="/linkpage/auth/:id" element={<Linkpage />} /> */}
         <Route path="/sidebar2" element={<Sidebar2 />} />
         <Route path="/landingpage" element={<Landingpage />} />
+        <Route path="/auth/:id" element={<Linkpage />} />
         
       </Routes>
     </Router>
