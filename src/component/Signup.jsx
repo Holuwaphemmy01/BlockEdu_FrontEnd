@@ -6,6 +6,7 @@ import logo from "../assets/logo.png";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
+
 const Signup = () => {
   const navigate = useNavigate();
 
@@ -31,32 +32,6 @@ const Signup = () => {
       [name]: value,
     }));
   };
-
-  
-
-
-  const handleSubmit = async()=>{
-    try{
-      console.log(formData)
-
-      const response = await axios.post('https://blockedu.onrender.com/auth/institution/register', formData);
-      if (response.status === 201){
-        console.log("Navigating to login...");
-        alert("Registration Successful")
-        navigate("/login", { state: formData });
-      }
-      
-      else{
-        setError(response);
-      }
-  
-  }catch (error){
-      setError(error.response?.data?.message || 'Registration failed. Please try again.');
-  }
- 
-
-  }
-  
 
   const validateForm = () => {
     let errors = {};
@@ -85,6 +60,8 @@ const Signup = () => {
       errors.password = "Password is required";
     } else if (formData.password.length < 6) {
       errors.password = "Password must be at least 6 characters long";
+    } else if (!/(?=.*[A-Za-z])(?=.*\d)/.test(formData.password)) {
+      errors.password = "Password must contain letters and numbers";
     }
 
     if (!formData.confirmPassword) {
@@ -95,6 +72,22 @@ const Signup = () => {
 
     setError(errors);
     return Object.keys(errors).length === 0;
+  };
+
+  const handleSubmit = async () => {
+    if (!validateForm()) return;
+
+    try {
+      const response = await axios.post('https://blockedu.onrender.com/auth/institution/register', formData);
+      if (response.status === 201) {
+        alert("Registration Successful");
+        navigate("/login", { state: formData });
+      } else {
+        setError({ general: response.data.message || "Something went wrong" });
+      }
+    } catch (error) {
+      setError({ general: error.response?.data?.message || 'Registration failed. Please try again.' });
+    }
   };
 
  

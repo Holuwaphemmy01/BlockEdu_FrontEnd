@@ -2,6 +2,7 @@ import React from "react";
 import Sidebar from "../component/Sidebar";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 const Credentials = () => {
   const navigate = useNavigate();
@@ -26,12 +27,12 @@ const Credentials = () => {
     const file = document.getElementById("fileUpload").files[0]; 
 
     if (!token) {
-      alert("Token is missing. Please log in again.");
+        toast.error("Token is missing. Please log in again.");
       return;
     }
 
     if (!file) {
-      alert("Please upload a file.");
+      toast.error("Please upload a file.");
       return;
     }
 
@@ -51,12 +52,12 @@ const Credentials = () => {
         },
       });
 
-      alert("Student added successfully");
+      toast.success("Student added successfully");
       navigate("/dashboard1");
     } catch (error) {
       
       console.error("Error submitting student data:", error);
-      alert("Failed to add student. Please try again.");
+      toast.error("Failed to add student. Please try again.");
     }
   };
 

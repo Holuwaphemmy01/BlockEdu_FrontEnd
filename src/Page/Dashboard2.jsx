@@ -5,6 +5,7 @@ import Sidebar2 from "../component/Sidebar2";
 import { FiLogOut, FiCopy } from "react-icons/fi";
 import wine from "../assets/wine.png";
 import { IoIosNotifications } from "react-icons/io";
+import { toast } from "react-toastify";
 
 const Dashboard2 = () => {
     const [open, setOpen] = useState(false);
@@ -30,7 +31,7 @@ const Dashboard2 = () => {
 
     const handlePasswordSubmit = async () => {
         if (passwordData.newPassword !== passwordData.confirmPassword) {
-            alert("Passwords do not match!");
+            toast.error("Passwords do not match!");
             return;
         }
 
@@ -52,14 +53,14 @@ const Dashboard2 = () => {
             });
 
             if (response.status === 200) {
-                alert("Password updated successfully!");
+                toast.success("Password updated successfully!");
                 localStorage.setItem("studentFirstLogin", "false");
                 setShowPasswordModal(false);
             } else {
-                alert("Error updating password!");
+                toast.error("Error updating password!");
             }
         } catch (error) {
-            alert("Failed to update password: " + error.message);
+            toast.error("Failed to update password: " + error.message);
         }
     };
 
@@ -97,7 +98,7 @@ const Dashboard2 = () => {
 
     const handleCopyToClipboard = () => {
         navigator.clipboard.writeText(url);
-        alert("URL copied to clipboard!");
+        toast.success("URL copied to clipboard!");
     };
 
     const handleViewCredential = async () => {

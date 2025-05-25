@@ -4,6 +4,7 @@ import { MdEmail } from "react-icons/md";
 import { FaLock } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 export const Login = () => {
   const navigate = useNavigate();
@@ -67,16 +68,17 @@ export const Login = () => {
       if (response.status == 200){
         if(response.data.role =="ROLE_INSTITUTION"){
         console.log("Navigating to dashboard1...");
-        alert("Login Successful")
+         toast.success("Login Successful! Redirecting to Dashboard...");
         localStorage.setItem("token",response.data.token)
         localStorage.setItem("id",response.data.id)
         localStorage.setItem("officialMail",response.data.officialMail)
         localStorage.setItem("institutionName",response.data.name)
-
+          setTimeout(() => {
         navigate("/dashboard1");
-        }      
+        } ,1500);
+        }     
        else{
-        alert("Login Successful")
+           toast.success("Login Successful! Redirecting to Dashboard...");
         console.log(response.data);
         localStorage.setItem("firstName", response.data.firstName);
         localStorage.setItem("lastName", response.data.lastName);
@@ -84,21 +86,24 @@ export const Login = () => {
         localStorage.setItem("studentEmail", response.data.email);
         localStorage.setItem("token", response.data.token)
         localStorage.setItem("studentFirstLogin", response.data.studentFirstLogin)
+        setTimeout(() => {
         navigate("/dashboard2");
+       },1500);
        }
       }      
       else{
-        console.log(response.data.status)
-  
+         toast.error(response.data.message || "Login failed");
         setError(response.data.message);
       }
       
     } catch (error) {
-      console.log(error.message)
-      setError(error.message)
+      console.log(error.message);
+      toast.error(error.message || "An error occurred");
+      setError(error.message);
+    } finally {
+      setSubmitting(false);
     }
-  }
-
+  };
 
   return (
     <div className="max-w-[700px] mx-auto bg-white p-8 rounded-2xl shadow-lg mt-10">
